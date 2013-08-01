@@ -1,0 +1,16 @@
+#!/usr/bin/ruby
+
+require 'rubygems'
+require 'rtunes'
+
+if (cmd = ARGV[0]).nil?
+  puts 'Must pass a command (e.g. play, pause)'
+  exit
+end
+
+unless (rt = Rtunes.new).respond_to?(cmd)
+  puts "Invalid command '#{cmd}'"
+  exit
+end
+
+ARGV[1].nil? ? rt.send(cmd) : rt.send(cmd, ARGV[1])
